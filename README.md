@@ -2,6 +2,13 @@
 
 > A centralized platform for reporting, discovering, and recovering lost items across campus.
 
+## 👥 Team Members
+
+- **Rashi Nema**
+- **Harsh Sinha**
+- **Kavya Chheda**
+- **Shauryadeep Srivastava**
+
 ---
 
 ## 📌 About ReclaimR
