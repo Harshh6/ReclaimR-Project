@@ -4,28 +4,37 @@ import { lostItems, foundItems } from "../data/mockData";
 
 export default function Home() {
   const navigate = useNavigate();
+
   const recent = [...lostItems, ...foundItems].slice(0, 4);
 
   return (
-    <div className="page container">
-      <div className="center-page">
+    <div className="page center-page">
 
-        {/* Hero */}
-        <h1 className="hero-title">
-          <span>Welcome to</span>
+      <div className="container">
+
+        {/* HERO LOGO */}
+        <div className="hero-title">
           <img
-            src="/Logo.png"
+            src="/logo.png"
             alt="ReclaimR"
             className="hero-logo"
           />
-        </h1>
+        </div>
 
+
+        {/* SUBTITLE */}
         <p className="hero-subtitle">
-          Report, discover and reclaim lost items on campus.
+          Lost something on campus? Found something that isn't yours?
+          <br />
+          ReclaimR helps you reconnect with what matters.
         </p>
 
+
+        {/* LOST / FOUND BUTTONS */}
         <div className="hero-actions">
+
           <button
+            type="button"
             className="hero-btn lost"
             onClick={() => navigate("/report-lost")}
           >
@@ -33,44 +42,54 @@ export default function Home() {
           </button>
 
           <button
+            type="button"
             className="hero-btn found"
             onClick={() => navigate("/report-found")}
           >
             Found Something
           </button>
+
         </div>
+
+
+        {/* CAMPUS */}
+        <section className="campus-section">
+
+          <h2 className="section-title">
+            CAMPUS WE'RE OPERATING
+          </h2>
+
+          <div className="campus-logo-box">
+            <img
+              src="/bharati-logo.png"
+              alt="Bharati Vidyapeeth Logo"
+              className="campus-logo"
+            />
+          </div>
+
+        </section>
+
+
+        {/* RECENT ITEMS */}
+        <section className="recent-section">
+
+          <h2 className="section-title">
+            Recent Items
+          </h2>
+
+          <div className="grid grid-4">
+            {recent.map((item) => (
+              <ItemCard
+                key={item.id}
+                item={item}
+              />
+            ))}
+          </div>
+
+        </section>
+
       </div>
 
-      {/* Campus Section */}
-      <section className="campus-section">
-        <h2 className="section-title">
-          CAMPUS WE'RE OPERATING
-        </h2>
-
-        <div
-          className="image-placeholder"
-          style={{
-            height: 100,
-            maxWidth: 300,
-            margin: "0 auto",
-          }}
-        >
-          [ UNIVERSITY LOGO ]
-        </div>
-      </section>
-
-      {/* Recently Lost & Found */}
-      <section className="recent-section">
-        <h2 className="section-title">
-          Recently Lost & Found
-        </h2>
-
-        <div className="grid grid-4">
-          {recent.map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
-        </div>
-      </section>
     </div>
   );
 }

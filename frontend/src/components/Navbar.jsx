@@ -1,61 +1,107 @@
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const location = useLocation();
+
   return (
     <nav className="navbar">
 
-      <div className="logo-placeholder">
+      {/* =========================
+          LOGO
+      ========================= */}
+
+      <Link to="/home" className="logo-placeholder">
         <img
-          src="/Logo.png"
+          src={`${import.meta.env.BASE_URL}logo.png`}
           alt="ReclaimR"
           className="reclaimr-logo"
         />
-      </div>
+      </Link>
+
+
+      {/* =========================
+          NAVIGATION LINKS
+      ========================= */}
 
       <div className="nav-links">
-        <NavLink
+
+        {/* HOME */}
+        <Link
           to="/home"
-          className={({ isActive }) => isActive ? "active" : ""}
+          className={
+            location.pathname === "/home"
+              ? "active"
+              : ""
+          }
         >
           HOME
-        </NavLink>
+        </Link>
 
-        <NavLink
+
+        {/* LOST & FOUND */}
+        <Link
           to="/lost-found"
-          className={({ isActive }) => isActive ? "active" : ""}
+          className={
+            location.pathname === "/lost-found"
+              ? "active"
+              : ""
+          }
         >
           LOST & FOUND
-        </NavLink>
+        </Link>
 
-        <NavLink
+
+        {/* HOW IT WORKS */}
+        <Link
           to="/how-it-works"
-          className={({ isActive }) => isActive ? "active" : ""}
+          className={
+            location.pathname === "/how-it-works"
+              ? "active"
+              : ""
+          }
         >
           HOW IT WORKS
-        </NavLink>
+        </Link>
 
-        <NavLink
+
+        {/* ABOUT US */}
+        <Link
           to="/about"
-          className={({ isActive }) => isActive ? "active" : ""}
+          className={
+            location.pathname === "/about"
+              ? "active"
+              : ""
+          }
         >
           ABOUT US
-        </NavLink>
+        </Link>
 
-        <NavLink
+
+        {/* HELP US */}
+        <Link
           to="/help"
-          className={({ isActive }) => isActive ? "active" : ""}
+          className={
+            location.pathname === "/help"
+              ? "active"
+              : ""
+          }
         >
           HELP US
-        </NavLink>
+        </Link>
+
       </div>
 
-      <NavLink
+
+      {/* =========================
+          PROFILE
+      ========================= */}
+
+      <Link
         to="/profile"
         className="profile-circle"
-        title="Profile"
       >
         👤
-      </NavLink>
+      </Link>
 
     </nav>
   );
