@@ -22,7 +22,11 @@ export default function Login() {
     if (!form.email || !form.password) return setError("Email and password are required.");
     if (!/\S+@\S+\.\S+/.test(form.email)) return setError("Enter a valid email.");
     const res = await loginUser(form);
-    if (res.success) { setSuccess("Login successful!"); setTimeout(() => navigate("/home"), 400); }
+    if (res.success) {
+      localStorage.setItem("reclaimr-cookie-login-pending", "true");
+      setSuccess("Login successful!");
+      setTimeout(() => navigate("/home"), 400);
+    }
   };
 
   const handleSignup = async (e) => {
@@ -32,7 +36,11 @@ export default function Login() {
     if (!/\S+@\S+\.\S+/.test(form.email)) return setError("Enter a valid email.");
     if (!/^\d{10}$/.test(form.phone)) return setError("Enter a valid 10-digit phone number.");
     const res = await registerUser(form);
-    if (res.success) { setSuccess("Account created!"); setTimeout(() => navigate("/home"), 400); }
+    if (res.success) {
+      localStorage.setItem("reclaimr-cookie-login-pending", "true");
+      setSuccess("Account created!");
+      setTimeout(() => navigate("/home"), 400);
+    }
   };
 
   const handleAdminLogin = async (e) => {
