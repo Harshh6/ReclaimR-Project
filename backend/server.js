@@ -15,6 +15,6 @@ app.get("/", (req, res) => {
   res.send("ReclaimR Backend is running!");
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`ReclaimR backend running on http://localhost:${PORT}`);
 });
