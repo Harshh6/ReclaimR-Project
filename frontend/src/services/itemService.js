@@ -2,6 +2,74 @@ const API_BASE_URL =
   import.meta.env.VITE_API_ITEMS_URL ||
   "https://reclaimr-project.onrender.com/api/items";
 
+function getImageDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve(null);
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Failed to read image"));
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+async function compressImage(file) {
+  if (!file) {
+    return null;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Please select a valid image file.");
+  }
+
+  const maxSize = 1200;
+
+  const dataUrl = await getImageDataUrl(file);
+
+  const image = new Image();
+
+  image.src = dataUrl;
+
+  await new Promise((resolve, reject) => {
+    image.onload = resolve;
+    image.onerror = reject;
+  });
+
+  let width = image.width;
+  let height = image.height;
+
+  if (width > maxSize || height > maxSize) {
+    if (width > height) {
+      height = Math.round((height * maxSize) / width);
+      width = maxSize;
+    } else {
+      width = Math.round((width * maxSize) / height);
+      height = maxSize;
+    }
+  }
+
+  const canvas = document.createElement("canvas");
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d");
+
+  context.drawImage(image, 0, 0, width, height);
+
+  return canvas.toDataURL("image/jpeg", 0.75);
+}
+
 function toFrontendItem(item) {
   let contact = item.contact || "";
 
@@ -36,7 +104,9 @@ function toFrontendItem(item) {
   };
 }
 
-function toBackendItem(data, type) {
+async function toBackendItem(data, type) {
+  const imageUrl = await compressImage(data.image);
+
   return {
     title: data.itemName,
     description: data.description,
@@ -46,9 +116,10 @@ function toBackendItem(data, type) {
     date: data.date || null,
     time: data.time || null,
     status: "active",
-    image_url: data.image_url || null,
+    image_url: imageUrl,
     identifying_details: data.identifyingDetails || null,
     kept_at: data.keptAt || null,
+    contact: null,
     contact_method: data.contactMethod || null,
     contact_value: data.contactValue || null,
     email: data.email || null,
@@ -90,13 +161,17 @@ export async function reportLostItem(data) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(toBackendItem(data, "lost")),
+    body: JSON.stringify(
+      await toBackendItem(data, "lost")
+    ),
   });
 
   const result = await response.json();
 
   if (!response.ok) {
-    throw new Error(result.error || "Failed to report lost item");
+    throw new Error(
+      result.error || "Failed to report lost item"
+    );
   }
 
   return {
@@ -111,13 +186,17 @@ export async function reportFoundItem(data) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(toBackendItem(data, "found")),
+    body: JSON.stringify(
+      await toBackendItem(data, "found")
+    ),
   });
 
   const result = await response.json();
 
   if (!response.ok) {
-    throw new Error(result.error || "Failed to report found item");
+    throw new Error(
+      result.error || "Failed to report found item"
+    );
   }
 
   return {
