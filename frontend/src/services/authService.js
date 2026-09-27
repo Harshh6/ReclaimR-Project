@@ -1,15 +1,72 @@
-// Replace with real calls to POST /api/auth/login, POST /api/auth/register later.
-const ADMIN_CREDENTIALS = { username: "Admin", password: "Admin123" };
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://reclaimr-project.onrender.com/api/auth";
 
-export function loginUser({ email, password }) {
-  return Promise.resolve({ success: true, user: { email, role: "Student" } });
+export async function loginUser({ email, password }) {
+  const response = await fetch(`${API_BASE_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Login failed");
+  }
+
+  localStorage.setItem("reclaimr_token", data.token);
+
+  return data;
 }
 
-export function registerUser({ email, password, phone, role }) {
-  return Promise.resolve({ success: true, user: { email, phone, role } });
+export async function registerUser({ email, password, phone, role }) {
+  const response = await fetch(`${API_BASE_URL}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      phone,
+      role,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Registration failed");
+  }
+
+  return data;
 }
 
-export function loginAdmin({ username, password }) {
-  const ok = username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password;
-  return Promise.resolve({ success: ok });
+export async function loginAdmin({ username, password }) {
+  const response = await fetch(`${API_BASE_URL}/admin-login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Admin login failed");
+  }
+
+  localStorage.setItem("reclaimr_token", data.token);
+
+  return data;
 }
