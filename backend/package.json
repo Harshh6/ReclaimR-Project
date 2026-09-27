@@ -1,9 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "The backend of ReclaimR handles the server-side functionality\r of the campus lost and found management system.",
-  "main": "index.js",
+  "description": "The backend of ReclaimR handles the server-side functionality of the campus lost and found management system.",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
