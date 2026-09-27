@@ -25,13 +25,13 @@ export const foundItems = [
 ];
 
 export const founders = [
-  { name: "Rashi Nema", role: "Role to be added", image: null },
-  { name: "Harsh Sinha", role: "Role to be added", image: null },
-  { name: "Kavya Chheda", role: "Role to be added", image: null },
-  { name: "Shauryadeep Srivastava", role: "Role to be added", image: null },
+  { name: "Rashi Nema", role: "Role to be added", image: "/rashi-nema.png" },
+  { name: "Harsh Sinha", role: "Role to be added", image: "/harsh-sinha.png" },
+  { name: "Kavya Chheda", role: "Role to be added", image: "/kavya-chheda.png" },
+  { name: "Shauryadeep Srivastava", role: "Role to be added", image: "/shauryadeep.png" },
 ];
 
-export const mentor = { name: "Dr. Sheetal Patil", role: "Mentor", image: null };
+export const mentor = { name: "Dr. Sheetal S. Patil", role: "Mentor", image: null };
 
 export const adminStats = {
   lostItems: lostItems.length,

@@ -20,7 +20,12 @@ export default function Help() {
 
   return (
     <div className="page container">
-      <h1 className="section-title">Help Us</h1>
+      <h1
+        className="section-title"
+        style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, letterSpacing: "0.02em" }}
+      >
+        Help Us
+      </h1>
 
       <div className="card center-page" style={{ maxWidth: 480, margin: "0 auto 40px" }}>
         <h2>Support ReclaimR</h2>
