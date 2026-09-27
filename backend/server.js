@@ -10,7 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+
+// Allow image data sent as base64 inside JSON requests
+app.use(express.json({ limit: "10mb" }));
 
 app.use("/api/items", itemRoutes);
 app.use("/api/auth", authRoutes);
