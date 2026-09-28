@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -12,7 +13,7 @@ export default function Navbar() {
 
       <Link to="/home" className="logo-placeholder">
         <img
-          src={`${import.meta.env.BASE_URL}logo.png`}
+          src={logo}
           alt="ReclaimR"
           className="reclaimr-logo"
         />
