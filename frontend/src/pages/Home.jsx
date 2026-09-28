@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ItemCard from "../components/ItemCard";
 import { lostItems, foundItems } from "../data/mockData";
+import logo from "../assets/logo.png";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -31,84 +32,79 @@ export default function Home() {
           userSelect: showCookieWindow ? "none" : "auto",
         }}
       >
-
         <div className="container">
 
-        {/* HERO LOGO */}
-        <div className="hero-title">
-          <img
-            src="/logo.png"
-            alt="ReclaimR"
-            className="hero-logo"
-          />
-        </div>
-
-
-        {/* SUBTITLE */}
-        <p className="hero-subtitle">
-          Lost something on campus? Found something that isn't yours?
-          <br />
-          ReclaimR helps you reconnect with what matters.
-        </p>
-
-
-        {/* LOST / FOUND BUTTONS */}
-        <div className="hero-actions">
-
-          <button
-            type="button"
-            className="hero-btn lost"
-            onClick={() => navigate("/report-lost")}
-          >
-            Lost Something
-          </button>
-
-          <button
-            type="button"
-            className="hero-btn found"
-            onClick={() => navigate("/report-found")}
-          >
-            Found Something
-          </button>
-
-        </div>
-
-
-        {/* CAMPUS */}
-        <section className="campus-section">
-
-          <h2 className="section-title">
-            CAMPUS WE'RE OPERATING
-          </h2>
-
-          <div className="campus-logo-box">
+          {/* HERO LOGO */}
+          <div className="hero-title">
             <img
-              src="/bharati-logo.png"
-              alt="Bharati Vidyapeeth Logo"
-              className="campus-logo"
+              src={logo}
+              alt="ReclaimR"
+              className="hero-logo"
             />
           </div>
 
-        </section>
+          {/* SUBTITLE */}
+          <p className="hero-subtitle">
+            Lost something on campus? Found something that isn't yours?
+            <br />
+            ReclaimR helps you reconnect with what matters.
+          </p>
 
+          {/* LOST / FOUND BUTTONS */}
+          <div className="hero-actions">
 
-        {/* RECENT ITEMS */}
-        <section className="recent-section">
+            <button
+              type="button"
+              className="hero-btn lost"
+              onClick={() => navigate("/report-lost")}
+            >
+              Lost Something
+            </button>
 
-          <h2 className="section-title">
-            Recent Items
-          </h2>
+            <button
+              type="button"
+              className="hero-btn found"
+              onClick={() => navigate("/report-found")}
+            >
+              Found Something
+            </button>
 
-          <div className="grid grid-4">
-            {recent.map((item) => (
-              <ItemCard
-                key={item.id}
-                item={item}
-              />
-            ))}
           </div>
 
-        </section>
+          {/* CAMPUS */}
+          <section className="campus-section">
+
+            <h2 className="section-title">
+              CAMPUS WE'RE OPERATING
+            </h2>
+
+            <div className="campus-logo-box">
+              <img
+                src="/bharati-logo.png"
+                alt="Bharati Vidyapeeth Logo"
+                className="campus-logo"
+              />
+            </div>
+
+          </section>
+
+          {/* RECENT ITEMS */}
+          <section className="recent-section">
+
+            <h2 className="section-title">
+              Recent Items
+            </h2>
+
+            <div className="grid grid-4">
+              {recent.map((item) => (
+                <ItemCard
+                  key={item.id}
+                  item={item}
+                />
+              ))}
+            </div>
+
+          </section>
 
         </div>
       </div>
@@ -144,7 +140,14 @@ export default function Home() {
               This website uses cookies to ensure you get the best experience
             </h2>
 
-            <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
               <button
                 type="button"
                 onClick={() => handleCookieChoice("accepted")}
@@ -167,9 +170,13 @@ export default function Home() {
                 onMouseLeave={() => setIsRejectHovered(false)}
                 style={{
                   padding: "12px 18px",
-                  border: `1px solid ${isRejectHovered ? "var(--red-accent)" : "var(--border)"}`,
+                  border: `1px solid ${
+                    isRejectHovered ? "var(--red-accent)" : "var(--border)"
+                  }`,
                   borderRadius: "8px",
-                  background: isRejectHovered ? "var(--red-soft)" : "#ffffff",
+                  background: isRejectHovered
+                    ? "var(--red-soft)"
+                    : "#ffffff",
                   color: "#1a1a1a",
                   fontWeight: 700,
                 }}

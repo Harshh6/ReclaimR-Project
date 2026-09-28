@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { founders, mentor } from "../data/mockData";
+import logo from "../assets/logo.png";
 
 const problems = [
   { title: "Scattered Information", desc: "Lost and found information is often spread across different places." },
@@ -31,14 +32,27 @@ export default function About() {
         >
           About
           <img
-            src="/logo.png"
+            src={logo}
             alt="ReclaimR"
-            style={{ width: "min(190px, 45vw)", height: "auto", display: "block" }}
+            style={{
+              width: "min(190px, 45vw)",
+              height: "auto",
+              display: "block",
+            }}
           />
         </h1>
-        <p style={{ maxWidth: 600, margin: "12px auto", color: "var(--text-muted)" }}>
-          ReclaimR is a student-driven project dedicated to improving lost-and-found management on university and college campuses.
+
+        <p
+          style={{
+            maxWidth: 600,
+            margin: "12px auto",
+            color: "var(--text-muted)",
+          }}
+        >
+          ReclaimR is a student-driven project dedicated to improving
+          lost-and-found management on university and college campuses.
         </p>
+
         <p
           onMouseEnter={() => setIsTaglineHovered(true)}
           onMouseLeave={() => setIsTaglineHovered(false)}
@@ -58,17 +72,24 @@ export default function About() {
             transition: "transform 0.25s ease",
           }}
         >
-          Found by <span style={{ color: "var(--red-accent)" }}>Students</span>, For <span style={{ color: "var(--red-accent)" }}>Students</span>.
+          Found by{" "}
+          <span style={{ color: "var(--red-accent)" }}>Students</span>, For{" "}
+          <span style={{ color: "var(--red-accent)" }}>Students</span>.
         </p>
       </div>
 
       <section style={{ margin: "56px 0" }}>
         <h2
           className="section-title"
-          style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, letterSpacing: "0.02em" }}
+          style={{
+            fontFamily: "Georgia, 'Times New Roman', serif",
+            fontWeight: 700,
+            letterSpacing: "0.02em",
+          }}
         >
           Problems With Traditional Lost & Found
         </h2>
+
         <div className="grid grid-4">
           {problems.map((p) => (
             <div
@@ -77,13 +98,27 @@ export default function About() {
               onMouseEnter={() => setHoveredProblem(p.title)}
               onMouseLeave={() => setHoveredProblem(null)}
               style={{
-                transform: hoveredProblem === p.title ? "translateY(-6px)" : "translateY(0)",
-                boxShadow: hoveredProblem === p.title ? "0 8px 20px rgba(0, 0, 0, 0.12)" : undefined,
+                transform:
+                  hoveredProblem === p.title
+                    ? "translateY(-6px)"
+                    : "translateY(0)",
+                boxShadow:
+                  hoveredProblem === p.title
+                    ? "0 8px 20px rgba(0, 0, 0, 0.12)"
+                    : undefined,
                 transition: "transform 0.2s ease, box-shadow 0.2s ease",
               }}
             >
               <h4 style={{ color: "#d9787c" }}>{p.title}</h4>
-              <p style={{ fontSize: 14, color: "var(--text-muted)", marginTop: 8 }}>{p.desc}</p>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "var(--text-muted)",
+                  marginTop: 8,
+                }}
+              >
+                {p.desc}
+              </p>
             </div>
           ))}
         </div>
@@ -92,10 +127,15 @@ export default function About() {
       <section style={{ margin: "56px 0" }}>
         <h2
           className="section-title"
-          style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, letterSpacing: "0.02em" }}
+          style={{
+            fontFamily: "Georgia, 'Times New Roman', serif",
+            fontWeight: 700,
+            letterSpacing: "0.02em",
+          }}
         >
           Founding Members
         </h2>
+
         <div className="grid grid-4">
           {founders.map((f) => (
             <div
@@ -103,10 +143,23 @@ export default function About() {
               className="card founder-card"
               onMouseEnter={() => setHoveredMember(f.name)}
               onMouseLeave={() => setHoveredMember(null)}
-              onClick={() => f.image && setSelectedPhoto({ src: f.image, name: f.name, role: f.role })}
+              onClick={() =>
+                f.image &&
+                setSelectedPhoto({
+                  src: f.image,
+                  name: f.name,
+                  role: f.role,
+                })
+              }
               style={{
-                transform: hoveredMember === f.name ? "translateY(-6px)" : "translateY(0)",
-                boxShadow: hoveredMember === f.name ? "0 8px 20px rgba(0, 0, 0, 0.12)" : undefined,
+                transform:
+                  hoveredMember === f.name
+                    ? "translateY(-6px)"
+                    : "translateY(0)",
+                boxShadow:
+                  hoveredMember === f.name
+                    ? "0 8px 20px rgba(0, 0, 0, 0.12)"
+                    : undefined,
                 transition: "transform 0.2s ease, box-shadow 0.2s ease",
                 cursor: f.image ? "pointer" : "default",
               }}
@@ -121,8 +174,17 @@ export default function About() {
               ) : (
                 <div className="profile-circle-lg">[ PROFILE IMAGE ]</div>
               )}
+
               <h4>{f.name}</h4>
-              <p style={{ fontSize: 13, color: "var(--text-muted)" }}>{f.role}</p>
+
+              <p
+                style={{
+                  fontSize: 13,
+                  color: "var(--text-muted)",
+                }}
+              >
+                {f.role}
+              </p>
             </div>
           ))}
         </div>
@@ -131,20 +193,37 @@ export default function About() {
       <section>
         <h2
           className="section-title"
-          style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, letterSpacing: "0.02em" }}
+          style={{
+            fontFamily: "Georgia, 'Times New Roman', serif",
+            fontWeight: 700,
+            letterSpacing: "0.02em",
+          }}
         >
           Under the Guidance Of
         </h2>
+
         <div
           className="card mentor-card"
           onMouseEnter={() => setHoveredMember("mentor")}
           onMouseLeave={() => setHoveredMember(null)}
-          onClick={() => setSelectedPhoto({ src: "/sheetal-maam.png", name: mentor.name, role: mentor.role })}
+          onClick={() =>
+            setSelectedPhoto({
+              src: "/sheetal-maam.png",
+              name: mentor.name,
+              role: mentor.role,
+            })
+          }
           style={{
             maxWidth: 320,
             margin: "0 auto",
-            transform: hoveredMember === "mentor" ? "translateY(-6px)" : "translateY(0)",
-            boxShadow: hoveredMember === "mentor" ? "0 8px 20px rgba(0, 0, 0, 0.12)" : undefined,
+            transform:
+              hoveredMember === "mentor"
+                ? "translateY(-6px)"
+                : "translateY(0)",
+            boxShadow:
+              hoveredMember === "mentor"
+                ? "0 8px 20px rgba(0, 0, 0, 0.12)"
+                : undefined,
             transition: "transform 0.2s ease, box-shadow 0.2s ease",
             cursor: "pointer",
           }}
@@ -155,8 +234,17 @@ export default function About() {
             className="profile-circle-lg"
             style={{ objectFit: "cover", cursor: "pointer" }}
           />
+
           <h4>{mentor.name}</h4>
-          <p style={{ fontSize: 13, color: "var(--text-muted)" }}>{mentor.role}</p>
+
+          <p
+            style={{
+              fontSize: 13,
+              color: "var(--text-muted)",
+            }}
+          >
+            {mentor.role}
+          </p>
         </div>
       </section>
 
@@ -194,6 +282,7 @@ export default function About() {
           >
             &times;
           </button>
+
           <div
             onClick={(event) => event.stopPropagation()}
             style={{
@@ -215,10 +304,17 @@ export default function About() {
                 borderRadius: "12px",
               }}
             />
+
             <h2 id="selected-person-name" style={{ marginTop: "20px" }}>
               {selectedPhoto.name}
             </h2>
-            <p style={{ marginTop: "8px", color: "var(--text-muted)" }}>
+
+            <p
+              style={{
+                marginTop: "8px",
+                color: "var(--text-muted)",
+              }}
+            >
               {selectedPhoto.role}
             </p>
           </div>
