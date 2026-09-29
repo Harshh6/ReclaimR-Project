@@ -92,7 +92,7 @@ export default function Home() {
           <section className="recent-section">
 
             <h2 className="section-title">
-              Recent Items
+              RECENT ITEMS
             </h2>
 
             <div className="grid grid-4">
