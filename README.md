@@ -110,7 +110,7 @@ ReclaimR provides a single platform where users can:
 - Git
 - GitHub
 - Jira
-- Postman
+- Postman 
 - Figma
 - draw.io
 
